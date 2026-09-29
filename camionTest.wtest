@@ -1,9 +1,70 @@
 import camion.*
+import cosas.* 
 
 describe "group of test for camion" {
-
-  test "first test" {
-    assert.that(true)
+method initialize() {
+    bumblebee.transformarseEn(robot)
+    arenaGranel.agregarPeso(150)
+    bateriaAntiaerea.cargarMisiles()
+    paqueteLadrillos.agregarLadrillos(80)
+    embalajeDeSeguridad.embalarUnaCosa(paqueteLadrillos)
+  }
+   method camionCargado(){
+    camion.cargar(bumblebee)
+    camion.cargar(arenaGranel)
+    camion.cargar(bateriaAntiaerea)
+    camion.cargar(paqueteLadrillos)
+    camion.cargar(embalajeDeSeguridad) 
+    // 1000
+  }
+  test "test 001" {
+    self.camionCargado()
+    assert.equals(1570, camion.pesoDeLaCarga())
+  }
+  test "test 002" {
+    self.camionCargado()
+    assert.that(camion.elPesoDeLasCosasSonPares())
   }
 
+  test "test 003" {
+    self.camionCargado()
+    assert.that(camion.algunaCosaPesa(300))
+  }
+
+  test "test 004" {
+    self.camionCargado()
+    assert.equals(bateriaAntiaerea, camion.primerCosaPeligrosa(100))
+  }
+
+  test "test 005" {
+    self.camionCargado()
+    assert.equals([bumblebee, bateriaAntiaerea], camion.tienenPeligrosidadMasAltaDe(10))
+  }
+
+  test "test 006" {
+    self.camionCargado()
+    assert.equals([], camion.esMasPeligrosoQueUnaCosa(bateriaAntiaerea))
+  }
+
+  test "test 007" {
+    self.camionCargado()
+    assert.that(camion.estaExcedido())
+  }
+
+  test "test 008" {
+    self.camionCargado()
+    assert.notThat(camion.puedeCircularEnRuta(80))
+  }
+
+  test "test 009" {
+    self.camionCargado()
+    assert.equals(bumblebee, camion.cosaMasPesada())
+  }
+
+  test "test 010" {
+    self.camionCargado()
+    assert.notThat(camion.algunaCosaPesaEntre(1, 100))
+  }
 }
+
+  
